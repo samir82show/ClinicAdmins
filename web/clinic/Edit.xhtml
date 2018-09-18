@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditClinicTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:outputLabel value="Welcome #{userauthController.username}"/><br /><br />
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditClinicLabel_id}" for="id" />
+                    <h:inputText disabled="true" id="id" value="#{userauthController.clinic.id}" title="#{bundle.EditClinicTitle_id}"/>
+                    <h:outputLabel value="#{bundle.EditClinicLabel_image}" for="image" />
+                    <h:inputText id="image" value="#{userauthController.clinic.image}" title="#{bundle.EditClinicTitle_image}" />
+                    <h:outputLabel value="#{bundle.EditClinicLabel_name}" for="name" />
+                    <h:inputText id="name" value="#{userauthController.clinic.name}" title="#{bundle.EditClinicTitle_name}" />
+                    <h:outputLabel value="#{bundle.EditClinicLabel_phones}" for="phones" />
+                    <h:inputText id="phones" value="#{userauthController.clinic.phones}" title="#{bundle.EditClinicTitle_phones}" />
+                    <h:outputLabel value="#{bundle.EditClinicLabel_areaId}" for="areaId" />
+                    <h:selectOneMenu id="areaId" value="#{userauthController.clinic.areaId}" title="#{bundle.EditClinicTitle_areaId}" >
+                        <f:selectItems value="#{areaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{userauthController.updateClinic()}" value="#{bundle.EditClinicSaveLink}"/><br />
+                <h:commandLink action="#{userauthController.logout()}" value="Logout" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditClinicViewLink}"/>
+                <br />
+                <h:commandLink action="#{clinicController.prepareList}" value="#{bundle.EditClinicShowAllLink}" immediate="true"/>
+                <br />
+                <h:link outcome="/doctor/List" value="Show All Doctor Items"/>
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditClinicIndexLink}" />
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+</html>
